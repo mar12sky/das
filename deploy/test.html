@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/plugins/tinymce/tinymce.min.js"></script>
+    <style>
+        .tox-promotion{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <textarea id="tiny"></textarea>
+      </div>
+      <section>
+        <main class="editable tinymce-body">
+        <h1>Process</h1>
+      
+          <p>We work closely with you to build and fulfill the project’s needs by *{completion.date}*.</p>
+      
+          <p>We do this by establishing clear goals and a comprehensive solution based on *{client.company}*’s needs.</p>
+      
+          <p>Our process is as follows.</p>
+          
+          <h2>Phase 1: initial consultation</h2>
+      
+          <p>Our expert team reviews any and all project-related systems and determines:<p>
+          
+          <ul>
+          <li>existing pain points; and</li>
+          <li>existing leverage opportunities.</li>
+          </ul>
+      
+          <p>Based on this initial consultation we develop a solutions list.</p>
+      
+          <h2>Phase 2: solution model</h2>
+      
+          <p>Working with your team we implement the selected solution.</p>
+      
+          <p>This allows us to tailor the solution specifically for *{client.company}*’s needs, ensuring the solution does not include services you do not need and should not pay for.</p>
+      
+          <h2>Phase 3: implementation</h2>
+      
+          <p>Once we have agreed on a solution, our team implements the project plan.</p>
+      
+          <p>We will first deliver a detailed outline of the plan with a timeline that includes all relevant due dates and deliverables.</p>
+        </main>
+      </section>
+      <script>
+        const settings = {
+            //extra toolbars : fontsize
+            plugins: 'lists help',
+            toolbar: 'undo redo | blocks | fontsizeinput | bold italic  | forecolor backcolor | alignleft aligncenter alignright alignjustify | lineheight | fontselect | bullist numlist',
+            //ui_mode: 'split',
+            //min_height: 500,
+            license_key: 'gpl',
+        };
+        tinymce.init({
+        ...settings,
+        selector: '.tinymce-body',
+        inline: true
+        });
+
+        
+      </script>
+</body>
+</html>

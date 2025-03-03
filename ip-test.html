@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript" src="./js/jquery.slim.min.js"></script>
+  <script type="text/javascript" src="./js/notiflix-report-aio.js"></script>
+  <script type="text/javascript" src="./js/sweetalert2@11.js"></script>
+  <script type="text/javascript" src="./js/polyfill.js"></script>
+  <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="./js/bootstrap-icons.min.css" rel="stylesheet" type="text/css">
+  <style>
+    div:where(.swal2-container).swal2-center>.swal2-popup {
+      background-color: #333 !important;
+      color: #fff !important;
+    }
+
+    div:where(.swal2-container) div:where(.swal2-html-container) {
+      font-size: 1.5rem !important;
+    }
+  </style>
+  <style>
+    .modal-content {
+      background-color: #212121;
+      color: #fff !important;
+    }
+
+    .modal-header,
+    .modal-footer {
+      border-color: #212121;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .nav-link {
+      padding-left: 2.0rem;
+      padding-right: 2.9rem;
+
+    }
+
+    .nav-link .active {
+      border-bottom: 2px solid red !important;
+    }
+
+    .nav-item {
+      padding-left: 2.0rem;
+      padding-right: 2.9rem;
+      font-size: 1.5rem;
+      color: rgb(25, 215, 127);
+    }
+
+    .nav-top .nav-item .active {
+      border-bottom: 2px solid #fff;
+    }
+
+    .nav-top .nav-link:hover {
+      border-bottom: 2px solid #fff;
+    }
+
+    .red {
+      color: red !important;
+    }
+
+    .nav-bottom .nav-link {
+      padding-left: 2.0rem;
+      padding-right: 2.9rem;
+
+    }
+
+    .attendance-opt {
+      height: 80px;
+      text-transform: uppercase;
+      padding-top: 12px;
+      padding-left: 25px;
+    }
+
+    .attendance-opt a {
+      color: #fff;
+      font-size: 2.2rem !important;
+    }
+
+    .attendance-opt a:hover {
+      text-decoration: none;
+    }
+
+    .attendance-opt:hover {
+      background: #edab21eb;
+    }
+
+    .attendance-opt-active {
+      background: #edab21eb;
+    }
+
+    .idcard {
+      /* background: #737c92; */
+      background: #215cedeb;
+      border-bottom: 1px solid #fff;
+    }
+
+    .idpin {
+      background: #215cedeb;
+      border-bottom: 1px solid #fff;
+    }
+
+    .idthumb {
+      /* background: rgb(170, 183, 228); */
+      background: #215cedeb;
+    }
+
+    .left-msg {
+      /* background: rgb(7, 151, 247); */
+      background-color: #899bb4f4;
+    }
+
+    .right-msg {
+      background: #3e80f1de;
+    }
+
+    .self_aligh_center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .num {
+      height: 80px;
+      font-weight: bold;
+      font-size: 2rem;
+      border: 1px solid #e5e7eae9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .num h3 {
+      color: #333;
+
+    }
+
+    .num h3 .text-muted {
+      color: #333 !important;
+      font-weight: bold;
+      font-size: 1.75rem;
+    }
+
+    .num:hover,
+    .no-num:hover {
+      background: #edab21eb;
+
+    }
+
+    .no-num {
+      height: 120px;
+      font-weight: bold;
+      font-size: 1.4rem;
+      border: 1px solid #e5e7eae9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      cursor: pointer;
+    }
+
+    div:where(.swal2-container).swal2-center>.swal2-popup {
+      background-color: #333 !important;
+      color: #fff !important;
+    }
+
+    div:where(.swal2-container) div:where(.swal2-html-container) {
+      font-size: 1.5rem !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid bg-danger fixed-top" data-bs-theme="dark"">
+    <div class=" container bg-info">
+    <button id="Primary" type="button" class="btn btn-primary">Primary</button>
+    <button id="Secondary" type="button" class="btn btn-secondary">Secondary</button>
+    <button id="Success" type="button" class="btn btn-success">Success</button>
+    <button id="Danger" type="button" class="btn btn-danger">Danger</button>
+    <button id="Warning" type="button" class="btn btn-warning">Warning</button>
+    <button id="Info" type="button" class="btn btn-info">Info</button>
+    <button id="Light" type="button" class="btn btn-light">Light</button>
+    <button id="Dark" type="button" class="btn btn-dark">Dark</button>
+    <button type="button" class="btn btn-link">Link</button>
+    <h2 class="display-5" id="demo">Status awaiting</h2>
+  </div>
+  </div>
+  <i class="bi bi-clock"></i>
+  <i class="bi bi-question-circle"></i>
+  <i class="bi bi-alarm"></i>
+  <i class="bi bi-arrow-clockwise"></i>
+  <i class="bi bi-check-circle"></i>
+  <i class="bi bi-clock"></i>
+  <!-- body -->
+  <div class="container-fluid" id="key-pad"
+    style="height: calc(100vh) !important; background: url(./image/flag0.jpg); background-size: cover; background-position-y: center; background-repeat: no-repeat;">
+    <div class="row" style="padding-top: calc(calc(100vh - 375px)/3);">
+      <div class="col-md-10 offset-md-1 mt-3 pt-5">
+        <div class="row text-white">
+
+          <div class="col-6 pl-0 pr-0">
+            <div class="right-msg">
+              <p class="text-white pl-5 pr-5"
+                style="padding-top: 70px; height: 240px; font-size: 1.75rem; font-weight: bold;">Please enter your
+                PIN and press Enter
+                to mark attendance.
+              </p>
+            </div>
+          </div>
+          <div class="col-6 pl-0 pr-0">
+            <div class="row left-msg">
+              <div class="col-8">
+                <div class="row text-center">
+                  <div class="col-4 num" onclick="insertIntoFormula('1')">1</div>
+                  <div class="col-4 num" onclick="insertIntoFormula('2')">2</div>
+                  <div class="col-4 num" onclick="insertIntoFormula('3')">3</div>
+                  <div class="col-4 num" onclick="insertIntoFormula('4')">4</div>
+                  <div class="col-4 num" onclick="insertIntoFormula('5')">5</div>
+                  <div class="col-4 num" onclick="insertIntoFormula('6')">6</div>
+                  <div class="col-4 num" onclick="insertIntoFormula('7')">7</div>
+                  <div class="col-4 num" onclick="insertIntoFormula('8')">8</div>
+                  <div class="col-4 num" onclick="insertIntoFormula('9')">9</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="row">
+                  <div class="col-12 num" onclick="deleteLastCharacter()">
+                    <h3>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-backspace-fill" viewBox="0 0 16 16">
+                        <path
+                          d="M15.683 3a2 2 0 0 0-2-2h-7.08a2 2 0 0 0-1.519.698L.241 7.35a1 1 0 0 0 0 1.302l4.843 5.65A2 2 0 0 0 6.603 15h7.08a2 2 0 0 0 2-2zM5.829 5.854a.5.5 0 1 1 .707-.708l2.147 2.147 2.146-2.147a.5.5 0 1 1 .707.708L9.39 8l2.146 2.146a.5.5 0 0 1-.707.708L8.683 8.707l-2.147 2.147a.5.5 0 0 1-.707-.708L7.976 8z" />
+                      </svg>
+                      <small class="text-muted">Back</small>
+                    </h3>
+
+                  </div>
+                  <div class="col-12 num" onclick="insertIntoFormula('0')">0</div>
+                  <div class="col-12 num" id="checkButton">
+                    <h3>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                        class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                          d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5" />
+                      </svg>
+                      <small class="text-muted">Enter</small>
+                      <!-- onclick="javascript:window.location.href = './ok.html';">Enter</small>-->
+                    </h3>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- -->
+          <div class="col-12">
+            <form>
+              <div class="form-row">
+                <div class="col-3 mr-auto ml-auto">
+
+                  <input type="password" pattern="[0-9]*" inputmode="numeric" id="formula" oninput="checkNumberFieldLength" type="text"
+                    maxlength="4" class="form-control form-control-lg text-center"
+                    style="font-size:2rem; background-color: #8faadc;" placeholder="****">
+                </div>
+                <script>
+                  function insertIntoFormula(specialChar) {
+                    const textarea = document.getElementById('formula');
+                    const insertStartPoint = textarea.selectionStart;
+                    const insertEndPoint = textarea.selectionEnd;
+                    let value = textarea.value;
+
+                    // text before cursor/highlighted text + special character + text after cursor/highlighted text
+                    value = value.slice(0, insertStartPoint) + specialChar + value.slice(insertEndPoint);
+                    textarea.value = value;
+                  }
+
+                  function deleteLastCharacter() {
+                    var inputField = document.getElementById('formula');
+                    var currentValue = inputField.value;
+                    inputField.value = currentValue.slice(0, -1);
+                  }
+                  function checkNumberFieldLength(elem){
+                  const textarea = document.getElementById('formula');
+                  if (elem.value.length > 4) {
+                  elem.value = elem.value.slice(0,4); 
+                  }
+                  }
+                </script>
+              </div>
+            </form>
+            <script>
+
+              document.getElementById('checkButton').addEventListener('click', function () {
+                var inputField = document.getElementById('formula');
+                var message = document.getElementById('message');
+
+                if (inputField.value.trim() === "") {
+                  $("errormodalBox").modal('show');
+                  //message.textContent = "Please Enter your PIN.";
+                  //message.style.color = "red";
+                  // inputField.style.borderColor = "red";
+                  // inputField.style.color = "red";
+                  //alert("Please Enter your PIN.");
+
+                  // Swal.fire({
+                  //   title: "Retry",
+                  //   text: "Please enter your PIN and press Enter to mark attendance.",
+                  //   icon: "error",
+                  //   showCancelButton: false, // There won't be any cancel button
+                  //   showConfirmButton: false // There won't be any confirm button
+                  // });
+                  //$('#modalBox').modal('show');
+                  setTimeout(function () {
+                    //$("errormodalBox").modal('hide');
+                  }, 5000);
+                  // inputField.style.color = "black";
+                  // inputField.style.borderColor = "black";
+                } else {
+                  //message.textContent = "The input field is not empty.";
+                  //message.style.color = "green";
+                  if (inputField.value < 4) {
+                    //alert("Your PIN is: " + inputField.value);
+                    $("errormodalBox").modal('show');
+                    $('#modalBox').modal('show');
+                  setTimeout(function () {
+                    $("errormodalBox").modal('hide');
+                  }, 5000);
+
+                  }
+
+                }
+
+
+              });
+
+            </script>
+          </div>
+          <!-- -->
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <!-- body -->
+  <!-- Button trigger modal -->
+  <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBox">
+  Launch demo modal
+</button>
+-->
+
+  <!-- Modal -->
+  <div class="modal fade" data-bs-theme="dark" id="modalBox" tabindex="-1" role="dialog" aria-labelledby="modalBoxTitle"
+    aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content text-white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            style="color: white; font-size: 3rem;">
+            <span aria-hidden="false">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center text-danger"><i class="bi bi-arrow-clockwise"></i></h1>
+          <h4 class="text-center p-2 display-5">Please enter your correct PIN and press Enter to mark attendance.</h4>
+        </div>
+        <div class="modal-footer">
+          <h1 style="font-size: 2rem;">&nbsp;</h1>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- -->
+  <!-- -->
+  <!-- Modal -->
+  <div class="modal fade" data-bs-theme="dark" id="errormodalBox" tabindex="-1" role="dialog"
+    aria-labelledby="modalBoxTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content text-white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            style="color: white; font-size: 3rem;">
+            <span aria-hidden="false">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center text-danger"><i class="bi bi-exclamation-circle-fill"></i></h1>
+          <h4 class="text-center p-2 display-5">Please enter your correct PIN and press Enter to mark attendance.</h4>
+        </div>
+        <div class="modal-footer">
+          <h1 style="font-size: 2rem;">&nbsp;</h1>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- -->
+  <!-- Modal -->
+  <div class="modal fade" data-bs-theme="dark" id="successmodalBox" tabindex="-1" role="dialog"
+    aria-labelledby="modalBoxTitle" aria-hidden="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content text-white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            style="color: white; font-size: 3rem;">
+            <span aria-hidden="false">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h1 class="text-center text-success"><i class="bi bi-check-circle"></i></h1>
+          <h4 class="text-center p-2 display-5">Please enter your correct PIN and press Enter to mark attendance.</h4>
+        </div>
+        <div class="modal-footer">
+          <h1 style="font-size: 2rem;">&nbsp;</h1>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      //alert( "ready!" );
+      $('#Primary').on("click", function () {
+        // console.log( $( this ).text() );
+        //wahAlert("Retry","Error","Please enter your correct PIN and press Enter to mark attendance.");
+        $('#modalBox').modal('show');
+        // After opening
+        $(window).on('shown.bs.modal', function () {
+          //$('#modalBox').modal('show');
+          alert('shown');
+          $('#demo').text('Pop has been opend');
+        });
+        // After Closing
+        $(window).on('hidden.bs.modal', function () {
+          //$('#modalBox').modal('hide');
+          alert('hidden');
+          $('#demo').text('Pop has been closed');
+        });
+      });
+
+      $('#Secondary').on("click", function () {
+        // console.log( $( this ).text() );
+        //wahAlert("Success","Success","Attendance for session date 11-01-2025 has been marked Successfully on 11-01-2025 at HH24:09:30");
+        $('#errormodalBox').modal('show');
+      });
+
+      $('#Success').on("click", function () {
+        // console.log( $( this ).text() );
+        $('#successmodalBox').modal('show');
+
+      });
+
+      function wahAlert(x, y, z) {
+        Swal.fire({
+          title: x,
+          icon: "error",
+          text: z, //"Please enter your correct PIN and press Enter to mark attendance.",
+          showCancelButton: false, // There won't be any cancel button
+          showConfirmButton: false // There won't be any confirm button
+        });
+      }
+
+    });
+  </script>
+  <script>
+    var ipid;
+    $(document).ready(function () {
+      //getting ip after hand shake
+      $('#Info').on("click", function () {
+        fetch("http://172.30.12.45:8080/ipv4",
+          {
+            method: 'GET',
+            // mode : 'same-origin',
+            // credentials: 'same-origin' ,
+            //body: "formData"
+          })
+          .then(function (response) {
+            return response.text()
+          }).then(function (text) {
+            //text is the server's response
+            //alert(text);
+            obj = JSON.parse(text);
+            ipid = obj.message.replace("::ffff:", "")
+            //alert(ipid);
+            $('#demo').text('Your Ip is: ' + ipid);
+          });
+      });
+    });
+    // Process user input
+    $(document).ready(function () {
+      //getting ip after hand shake
+      var fd = new FormData();
+
+
+      //$('#Light #checkButton').on("click", function () {
+        $('#checkButton').on("click", function () {
+        fd.append('input', ipid);
+        fetch("http://172.30.12.45/deploy/server.php",
+          {
+            method: 'POST',
+            // mode : 'same-origin',
+            // credentials: 'same-origin' ,
+            body: fd
+          })
+          .then(function (response) {
+            return response.text()
+          }).then(function (text) {
+            //text is the server's response              
+            //alert(text);                
+            $('#demo').text(text);
+          });
+      });
+    });
+
+
+  </script>
+  <script type="text/javascript" src="./js/jquery.slim.min.js"></script>
+  <script type="text/javascript" src="./js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
